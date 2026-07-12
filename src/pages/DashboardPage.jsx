@@ -159,6 +159,7 @@ export default function DashboardPage() {
         <table className="table">
           <thead>
             <tr>
+              <th className="thumb-col"></th>
               <th>Name</th>
               <th>Category</th>
               <th className="num">Quantity</th>
@@ -168,12 +169,19 @@ export default function DashboardPage() {
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={5} className="empty">Loading…</td></tr>
+              <tr><td colSpan={6} className="empty">Loading…</td></tr>
             ) : items.length === 0 ? (
-              <tr><td colSpan={5} className="empty">No products found.</td></tr>
+              <tr><td colSpan={6} className="empty">No products found.</td></tr>
             ) : (
               items.map((item) => (
                 <tr key={item.id}>
+                  <td className="thumb-col">
+                    {item.imageUrl ? (
+                      <img className="thumb" src={item.imageUrl} alt={item.name} />
+                    ) : (
+                      <div className="thumb thumb-empty" />
+                    )}
+                  </td>
                   <td className="strong">{item.name}</td>
                   <td>{item.category ? <span className="tag">{item.category}</span> : <span className="muted">—</span>}</td>
                   <td className="num">
